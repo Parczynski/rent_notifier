@@ -1,4 +1,4 @@
-import { Collection } from './classes/collection'
+import { Collection } from './collection'
 import { ConsoleHandler } from './handlers/console'
 import { MyHomeCatalog } from './myhome/myhome'
 import { InAppStorage } from './storage/inapp'
@@ -14,7 +14,7 @@ import dotenv from 'dotenv'
 
 	const collection = new Collection( handler )
 
-	const myhome = new MyHomeCatalog( storage )
+	const myhome = new MyHomeCatalog( storage, {} )
 
 	collection.addCatalog( myhome )
 
@@ -22,7 +22,7 @@ import dotenv from 'dotenv'
 
 	const check = async () => {
 		await collection.check()
-		setTimeout( check, parseInt( process.env.INTERVAL ) )
+		// setTimeout( check, parseInt( process.env.INTERVAL ) )
 	}
 
 	setTimeout( check, parseInt( process.env.INTERVAL ) )
