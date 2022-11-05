@@ -1,5 +1,5 @@
 import { Handler } from './handler'
-import { EstateStorage } from './storage';
+import { EstateStorage } from './storage'
 
 export abstract class Catalog {
 
