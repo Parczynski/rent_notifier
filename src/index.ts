@@ -1,8 +1,8 @@
 import { Collection } from './collection'
-import { ConsoleHandler } from './handlers/console'
 import { MyHomeCatalog } from './myhome/myhome'
 import { InAppStorage } from './storage/inapp'
 import dotenv from 'dotenv'
+import { Telegram } from './handlers/telegram'
 
 ( async() => {
 
@@ -10,7 +10,7 @@ import dotenv from 'dotenv'
 
 	const storage = new InAppStorage()
 
-	const handler = new ConsoleHandler()
+	const handler = new Telegram()
 
 	const collection = new Collection( handler )
 
