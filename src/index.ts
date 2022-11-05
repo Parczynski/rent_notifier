@@ -14,7 +14,12 @@ import dotenv from 'dotenv'
 
 	const collection = new Collection( handler )
 
-	const myhome = new MyHomeCatalog( storage, {} )
+	const myhome = new MyHomeCatalog( storage, {
+		cities: 8742159,
+		OwnerTypeID: 1,
+		FPriceTo: 650,
+		e: '776481390.776472116.776471185.777654897.776734274.776998491.776460995.776458944.776463102.77646544'
+	} )
 
 	collection.addCatalog( myhome )
 
