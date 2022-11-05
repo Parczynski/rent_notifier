@@ -25,11 +25,15 @@ import { Telegram } from './handlers/telegram'
 
 	collection.addCatalog( myhome )
 
+	console.log( 'Initial scan...' )
 	await collection.init()
 
+	console.log( 'Scan complete. Waiting for updates...' )
+
 	const check = async () => {
+
 		await collection.check()
-		// setTimeout( check, parseInt( process.env.INTERVAL ) )
+		setTimeout( check, parseInt( process.env.INTERVAL ) )
 	}
 
 	setTimeout( check, parseInt( process.env.INTERVAL ) )
