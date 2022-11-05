@@ -1,5 +1,5 @@
-import { Catalog } from './catalog'
-import { Handler } from './handler'
+import { Catalog } from './classes/catalog'
+import { Handler } from './classes/handler'
 
 export class Collection {
 
