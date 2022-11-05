@@ -10,7 +10,9 @@ import { Telegram } from './handlers/telegram'
 
 	const storage = new InAppStorage()
 
-	const handler = new Telegram()
+	const handler = new Telegram( process.env.TG_TOKEN )
+
+	process.env.TG_CHATS.split( ',' ).map( chat => handler.addChat( chat ) )
 
 	const collection = new Collection( handler )
 
