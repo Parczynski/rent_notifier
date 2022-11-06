@@ -11,6 +11,7 @@ export class Telegram extends Handler {
 	}
 
 	addChat( chat: string ) {
+		console.log( `Add new receiver for notifications in Telegram: ${chat}` )
 		this.chats.push( chat )
 	}
 
