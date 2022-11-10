@@ -13,7 +13,15 @@ export class Collection {
 	}
 
 	async init(): Promise<void> {
-		this.items.map( catalog => catalog.check( ) )
+		this.items.map( async catalog => {
+
+			for await ( const estate of catalog.check(  ) ) {
+				const exists = await this.storage.get( catalog.name, estate.id )
+				if( exists !== false ) continue
+				this.storage.set( 'myhome', estate.id, estate )
+			}
+
+		} )
 	}
 
 	async check(): Promise<void> {
