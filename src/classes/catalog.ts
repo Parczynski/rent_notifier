@@ -1,9 +1,7 @@
-import { Handler } from './handler'
-import { EstateStorage } from './storage'
+import { Estate } from './estate'
 
 export abstract class Catalog {
-
-	constructor( protected storage: EstateStorage ) {}
-
-	abstract check( handler?: Handler ): Promise<void>
+	public name = 'abstract'
+	
+	abstract check( ): AsyncGenerator<Estate>
 }

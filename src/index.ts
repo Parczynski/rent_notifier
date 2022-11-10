@@ -14,9 +14,9 @@ import { Telegram } from './handlers/telegram'
 
 	process.env.TG_CHATS.split( ',' ).map( chat => handler.addChat( chat ) )
 
-	const collection = new Collection( handler )
+	const collection = new Collection( handler, storage )
 
-	const myhome = new MyHomeCatalog( storage, {
+	const myhome = new MyHomeCatalog( {
 		cities: 8742159,
 		OwnerTypeID: 1,
 		FPriceTo: 650,

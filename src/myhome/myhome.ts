@@ -1,8 +1,7 @@
 import { Catalog } from '../classes/catalog'
-import { Handler } from '../classes/handler'
-import { EstateStorage } from '../classes/storage'
 import axios from 'axios'
 import { MyHomeEstateResponse, MyHomeFactory } from './myhome.factory'
+import { Estate } from '../classes/estate'
 
 const ENDPOINT = 'https://www.myhome.ge/ru/s/'
 
@@ -15,11 +14,14 @@ interface IListResponse {
 }
 
 export class MyHomeCatalog extends Catalog {
-	constructor( storage: EstateStorage, protected params: Record<string,unknown> ) {
-		super( storage )
+
+	public name = 'myhome'
+	
+	constructor( protected params: Record<string,unknown> ) {
+		super(  )
 	}
 
-	async check( handler?: Handler ): Promise<void> {
+	async * check( ): AsyncGenerator<Estate> {
 
 		const queryString = {
 			Keyword: '%D0%91%D0%B0%D1%82%D1%83%D0%BC%D0%B8',
@@ -38,17 +40,9 @@ export class MyHomeCatalog extends Catalog {
 
 		for await ( const data of content.data.Data.Prs ) {
 
-			const exists = await this.storage.get( 'myhome', data.product_id )
-
-			if( exists !== false ) continue
-
 			const estate = estateFactory.convert( data )
 
-			this.storage.set( 'myhome', data.product_id, estate )
-
-			if( typeof handler !== 'undefined' ) {
-				handler.handle( estate )
-			}
+			yield estate
 
 		}
 		

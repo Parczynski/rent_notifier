@@ -11,6 +11,7 @@ export class InAppStorage extends EstateStorage {
 
 	async set( catalog: string, id: string, estate: Estate ): Promise<Estate> {
 
+		console.log( estate )
 		this.storage.set( this.hash( catalog, id ), estate )
 		return estate
 
