@@ -19,6 +19,11 @@ export class Collection {
 				const exists = await this.storage.get( catalog.name, estate.id )
 				if( exists !== false ) continue
 				this.storage.set( 'myhome', estate.id, estate )
+
+				if( process.env.TG_SEND_INIT_ESTATES === '1' && typeof this.handler !== 'undefined' ) {
+					this.handler.handle( estate )
+				}
+
 			}
 
 		} )
