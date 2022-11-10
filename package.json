@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "start": "node built/index.js",
+    "server_start": "node index.js",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix",
     "test": "jest --coverage",
     "dev": "tsc-watch --onSuccess \"npm start\"",
-    "build": "tsc",
-    "postbuild": "cp package.json dist/package.json && cd dist && npm install --only=production"
+    "build": "tsc"
   },
   "author": "Igor Parchinski",
   "license": "ISC",
