@@ -39,7 +39,6 @@ export class Telegram extends Handler {
 
 		for await ( const chat of this.chats ) {
 			const result = await axios.get( `https://api.telegram.org/bot${this.token}/sendMessage?parse_mode=Markdown&text=${message}&chat_id=${chat}` )
-			console.log( result.headers )
 		}
 
 	}
