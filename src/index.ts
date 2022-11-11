@@ -32,8 +32,13 @@ import { Telegram } from './handlers/telegram'
 
 	const check = async () => {
 
-		await collection.check()
-		setTimeout( check, parseInt( process.env.INTERVAL ) )
+		try {
+			await collection.check()
+			setTimeout( check, parseInt( process.env.INTERVAL ) )
+		} catch( e ) {
+			console.log( e )
+		}
+		
 	}
 
 	setTimeout( check, parseInt( process.env.INTERVAL ) )

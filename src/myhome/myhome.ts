@@ -23,28 +23,40 @@ export class MyHomeCatalog extends Catalog {
 
 	async * check( ): AsyncGenerator<Estate> {
 
-		const queryString = {
-			Keyword: '%D0%91%D0%B0%D1%82%D1%83%D0%BC%D0%B8',
-			AdTypeID: '3',
-			PrTypeID: '1',
-			mapC: '41.6509502%2C41.6360085',
-			GID: '8742159',
-			FCurrencyID: '1',
-			Ajax: '1',
-			...this.params
+		console.log( 'check' )
+
+		try {
+			const queryString = {
+				Keyword: '%D0%91%D0%B0%D1%82%D1%83%D0%BC%D0%B8',
+				AdTypeID: '3',
+				PrTypeID: '1',
+				mapC: '41.6509502%2C41.6360085',
+				GID: '8742159',
+				FCurrencyID: '1',
+				Ajax: '1',
+				...this.params
+			}
+	
+			const url = `${ENDPOINT}?${new URLSearchParams( queryString )}`
+	
+			const content = await axios.get<IListResponse>( url )
+
+			for await ( const data of content.data.Data.Prs ) {
+	
+				const estate = estateFactory.convert( data )
+	
+				yield estate
+	
+			}
+		} catch( e ) {
+			if( e instanceof Error ) {
+				console.log( `Cant parse ${this.name}:`, e.message )
+			} else {
+				console.log( e )
+			}
+			return
 		}
-
-		const url = `${ENDPOINT}?${new URLSearchParams( queryString )}`
-
-		const content = await axios.get<IListResponse>( url )
-
-		for await ( const data of content.data.Data.Prs ) {
-
-			const estate = estateFactory.convert( data )
-
-			yield estate
-
-		}
+		
 		
 	}
 }
